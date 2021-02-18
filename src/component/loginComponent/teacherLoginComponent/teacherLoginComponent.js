@@ -37,12 +37,20 @@ export default function TeacherLoginComponent() {
               data.data().password === teacherPassword &&
               data.data().ID === personalTeacherNumber
             ) {
-              console.log("teacher password", teacherPassword);
+              let today = new Date();
+              const date =
+                today.getFullYear() +
+                "-" +
+                (today.getMonth() + 1) +
+                "-" +
+                today.getDate();
+              // const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
               setTeacherAuthenticationError(false);
               localStorage.setItem("login", "logged");
               localStorage.setItem("type", "teacher");
               localStorage.setItem("ID", personalTeacherNumber);
               localStorage.setItem("user", JSON.stringify(data.data()));
+              localStorage.setItem("todaysDate", date);
               setSpinner(false);
               history.push("/dashboard");
             } else {

@@ -6,7 +6,7 @@ import "./pointerDashboard.css";
 import db from "./../../connectFirebase/firebase";
 import HomeComponent from "../HomeComponent/HomeComponent";
 import HomeWorkComponent from "../homeWorkComponent/homeWorkComponent";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function App() {
   // const [points, setPoints] = useState([]);
@@ -30,29 +30,37 @@ export default function App() {
         <>
           <div className="xsom"></div>
           <div className="content_subject">
-            <Link to="/dashboard" style={{ textDecoration: "none",display: "flex", alignItems: "center", cursor: "pointer"}}>
-          <div className="back-div-icon">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              version="1.1"
-              id="Layer_1"
-              x="0px"
-              className="_back-div-icon-svg"
-              y="0px"
-              viewBox="0 0 195.4 322.4"
+            <Link
+              to="/dashboard"
+              style={{
+                textDecoration: "none",
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
             >
-              <polygon points="117,161.4 0,283 41.1,322.4 195.4,161.4 41.1,0 0,39.4 " />
-            </svg>
-          </div>
-          <p className="_back-ofmlqxml">უკან</p>
-          </Link>      
+              <div className="back-div-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  id="Layer_1"
+                  x="0px"
+                  className="_back-div-icon-svg"
+                  y="0px"
+                  viewBox="0 0 195.4 322.4"
+                >
+                  <polygon points="117,161.4 0,283 41.1,322.4 195.4,161.4 41.1,0 0,39.4 " />
+                </svg>
+              </div>
+              <p className="_back-ofmlqxml">უკან</p>
+            </Link>
             <div className="content__person__information">
               <p>{localStorage.getItem("subject_id")}</p>
               <p className="student-name__content">{`${user.name} ${user.surname}`}</p>
               <table id="customers">
                 <tr>
                   <th>#</th>
-                  <th>გაკვეთილი</th>
+                  <th>დღე</th>
                   <th>მასწავლებელი</th>
                   <th>დასწრება</th>
                   <th>განმავითარებელი შეფასება</th>
@@ -63,7 +71,7 @@ export default function App() {
                     <>
                       <tr>
                         <td>{i}</td>
-                        <td>{`${item.day} - ${item.time}`}</td>
+                        <td>{`${item.date}`}</td>
                         <td>
                           {teachers.map(
                             (data) =>
@@ -71,7 +79,7 @@ export default function App() {
                               `${data.name} ${data.surname}`
                           )}
                         </td>
-                        <td>მალე დაემატება</td>
+                        <td>{item.checked}</td>
                         <td>{item.point}</td>
                         <td>{item.point}</td>
                       </tr>

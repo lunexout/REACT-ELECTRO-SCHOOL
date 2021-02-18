@@ -10,14 +10,13 @@ export default function ({ match }) {
   const [st, setSt] = useState(false);
   const [user, setUser] = useState([]);
   const [points, setPoints] = useState([]);
+  const [spinner, setSpinner] = useState(false);
 
   useEffect(() => {
-    console.log(1);
     db.collection("Teachers")
       .where("ID", "==", localStorage.getItem("ID"))
       .get()
       .then((data) => {
-        console.log(2);
         data.docs.map((studdoc) => {
           return db
             .collection("Teachers")
@@ -25,66 +24,47 @@ export default function ({ match }) {
             .collection("Classes")
             .get()
             .then((data) => {
-              console.log(3);
               data.docs.map((classdoc) => {
-                return (
-                  db
-                    .collection("Teachers")
-                    .doc(studdoc.id)
-                    .collection("Classes")
-                    .where("class_id", "==", match.params.id)
-                    // .doc(classdoc.id)
-                    // .collection("Subjects")
-                    // .where("subject_id", "==", localStorage.getItem("subject_id"))
-                    .get()
-                    .then((data) => {
-                      console.log(4);
-                      data.docs.map((subjectdoc) => {
-                        // console.log(subjectdoc.id);
-                        return (
-                          db
-                            .collection("Teachers")
-                            .doc(studdoc.id)
-                            .collection("Classes")
-                            .doc(classdoc.id)
-                            .collection("Subjects")
-                            .where("class_id", "==", match.params.id)
-                            // .collection("Students")
-                            .where("subject_id", "==", match.params.subject)
-                            .get()
-                            .then((snapshot) => {
-                              console.log(5);
-                              snapshot.docs.map((data) => {
-                                // setPoint(snapshot.docs.map((data) => data.data()));
-                                // console.log(data.data());
-                                return db
-                                  .collection("Teachers")
-                                  .doc(studdoc.id)
-                                  .collection("Classes")
-                                  .doc(classdoc.id)
-                                  .collection("Subjects")
-                                  .doc(data.id)
-                                  .collection("Students")
-                                  .get()
-                                  .then((data) => {
-                                    console.log(6);
-                                    data.docs.map((doc) => {
-                                      console.log(st);
-                                      setStudents(
-                                        data.docs.map(
-                                          (item) => item.data().student_id
-                                        )
-                                      );
-                                      setSt(true);
-                                    });
-                                  });
+                return db
+                  .collection("Teachers")
+                  .doc(studdoc.id)
+                  .collection("Classes")
+                  .where("class_id", "==", match.params.id)
+                  .get()
+                  .then((data) => {
+                    data.docs.map((subjectdoc) => {
+                      return db
+                        .collection("Teachers")
+                        .doc(studdoc.id)
+                        .collection("Classes")
+                        .doc(classdoc.id)
+                        .collection("Subjects")
+                        .where("class_id", "==", match.params.id)
+                        .where("subject_id", "==", match.params.subject)
+                        .get()
+                        .then((snapshot) => {
+                          snapshot.docs.map((data) => {
+                            return db
+                              .collection("Teachers")
+                              .doc(studdoc.id)
+                              .collection("Classes")
+                              .doc(classdoc.id)
+                              .collection("Subjects")
+                              .doc(data.id)
+                              .collection("Students")
+                              .get()
+                              .then((data) => {
+                                data.docs.map((doc) => {
+                                  setStudents(
+                                    data.docs.map((item) => item.data())
+                                  );
+                                  setSt(true);
+                                });
                               });
-                              // setSpinner(false);
-                            })
-                        );
-                      });
-                    })
-                );
+                          });
+                        });
+                    });
+                  });
               });
             });
         });
@@ -92,102 +72,205 @@ export default function ({ match }) {
   }, []);
 
   useEffect(() => {
-    console.log(1);
+    // setSpinner(true);
     students.map((student) => {
-      console.log("student", student);
       db.collection("Students")
-        .where("ID", "==", student)
-        // .get()
+        .where("ID", "==", student.student_id)
         .onSnapshot((data) => {
           data.docs.map((studdoc) => {
-            // console.log("93939393");
-            // setUser(data.docs.map((item) => item.data()));
             setUser((oldArray) => [...oldArray, studdoc.data()]);
-            // return db.collection('Students')
-            // .doc(data.id)
-            // data.docs.map((studdoc) => {
-            return db
-              .collection("Students")
-              .doc(studdoc.id)
-              .collection("Classes")
-              .get()
-              .then((doc) => {
-                doc.docs.map((classdoc) => {
-                  return db
-                    .collection("Students")
-                    .doc(studdoc.id)
-                    .collection("Classes")
-                    .doc(classdoc.id)
-                    .collection("Subjects")
-                    .where("subject_id", "==", match.params.subject)
-                    .get()
-                    .then((doc) => {
-                      doc.docs.map((subjectdoc) => {
-                        // console.log(subjectdoc.data());
-                        console.log(match.params.subject);
-                        console.log(subjectdoc.id);
+            // return db
+            //   .collection("Students")
+            //   .doc(studdoc.id)
+            //   .collection("Classes")
+            //   .get()
+            //   .then((doc) => {
+            //     doc.docs.map((classdoc) => {
+            //       return db
+            //         .collection("Students")
+            //         .doc(studdoc.id)
+            //         .collection("Classes")
+            //         .doc(classdoc.id)
+            //         .collection("Subjects")
+            //         .where("subject_id", "==", match.params.subject)
+            //         .get()
+            //         .then((doc) => {
+            //           doc.docs.map((subjectdoc) => {
 
-                        return db
-                          .collection("Students")
-                          .doc(studdoc.id)
-                          .collection("Classes")
-                          .doc(classdoc.id)
-                          .collection("Subjects")
-                          .doc(subjectdoc.id)
-                          .collection("Points")
-                          .get()
-                          .then((doc) => {
-                            doc.docs.map((pointdoc) => {
-                              setPoints(doc.docs.map((item) => item.data()));
-                              console.log(pointdoc.data());
-                            });
-                          });
-                      });
-                    });
-                });
-              });
-            // });
+            //             return db
+            //               .collection("Students")
+            //               .doc(studdoc.id)
+            //               .collection("Classes")
+            //               .doc(classdoc.id)
+            //               .collection("Subjects")
+            //               .doc(subjectdoc.id)
+            //               .collection("Points")
+            //               .get()
+            //               .then((doc) => {
+            //                 doc.docs.map((pointdoc) => {
+            //                   console.log(pointdoc.data());
+            //                   // setUser(doc.docs.map((item) => item.data()));
+            //                 });
+            //               });
+            //           });
+            //         });
+            //     });
+            //   });
           });
         });
     });
+    // setSpinner(false);
   }, [st]);
-  // useEffect(() => {
-  //   console.log(user);
-  // }, [user]);
+
+  const saveInformation = () => {
+    var pointTable = [];
+    var isError = false;
+
+    user.map((user) => {
+      var swrebadoba = "";
+      var a = document.getElementById(`select_table${user.ID}`).value;
+      var check = document.getElementById(`checked${user.ID}`).checked;
+
+      if (a == "აირჩიეთ ქულა") {
+        console.log("ukacravad sheavset " + user.name + " " + "- s  veli");
+        isError = true;
+      } else {
+        if (check === true) {
+          swrebadoba = "კი";
+          pointTable.push({
+            student_id: `${user.ID}`,
+            checked: `${swrebadoba}`,
+            point: `${a}`,
+            date: localStorage.getItem("todaysDate"),
+            class_id: match.params.id,
+            teacher_id: localStorage.getItem("ID"),
+            subject_id: match.params.subject,
+          });
+        } else {
+          swrebadoba = "არა";
+          pointTable.push({
+            student_id: `${user.ID}`,
+            checked: `${swrebadoba}`,
+            point: `${a}`,
+            date: localStorage.getItem("todaysDate"),
+            class_id: match.params.id,
+            teacher_id: localStorage.getItem("ID"),
+            subject_id: match.params.subject,
+          });
+        }
+      }
+    });
+
+    if (isError) {
+      alert("sheivsos velebi");
+    } else {
+      setSpinner(true);
+      pointTable.map(async (item) => {
+        return await db
+          .collection("Students")
+          .where("ID", "==", item.student_id)
+          .onSnapshot((data) => {
+            data.docs.map((studdoc) => {
+              return db
+                .collection("Students")
+                .doc(studdoc.id)
+                .collection("Classes")
+                .where("class_id", "==", item.class_id)
+                .onSnapshot((data) => {
+                  data.docs.map((classdoc) => {
+                    return db
+                      .collection("Students")
+                      .doc(studdoc.id)
+                      .collection("Classes")
+                      .doc(classdoc.id)
+                      .collection("Subjects")
+                      .where("subject_id", "==", item.subject_id)
+                      .onSnapshot((data) => {
+                        data.docs.map((subjectdoc) => {
+                          return db
+                            .collection("Students")
+                            .doc(studdoc.id)
+                            .collection("Classes")
+                            .doc(classdoc.id)
+                            .collection("Subjects")
+                            .doc(subjectdoc.id)
+                            .collection("Points")
+                            .doc(item.date)
+                            .set({
+                              student_id: item.student_id,
+                              checked: item.checked,
+                              point: item.point,
+                              date: item.date,
+                              class_id: item.class_id,
+                              teacher_id: item.teacher_id,
+                              subject_id: item.subject_id,
+                            });
+                        });
+                      });
+                  });
+                });
+            });
+          });
+      });
+      setSpinner(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
       <Sidebar />
       <div className="xsom"></div>
       <div className="hero__container" style={{ position: "absolute" }}>
+        <div style={{ textAlign: "center" }}>
+          {localStorage.getItem("todaysDate")}
+        </div>
         <div className="user-information">
-          <table id="customers">
+          {spinner && (
+            <div className="_width-prop">
+              <div className="loader"></div>
+            </div>
+          )}
+          <table className="students" id="customers">
             <tr>
               <th>სახელი გვარი</th>
               <th>სწრებადობა</th>
-              <th>დღე</th>
               <th>ქულა</th>
             </tr>
-            {user.map((item, i) => {
+            {user.map((student) => {
               return (
                 <>
                   <tr>
                     <td>
-                      {item.name} {item.surname}
+                      {student.name} {student.surname}
                     </td>
                     <td>
                       <label class="switch">
-                        <input type="checkbox" />
+                        <input type="checkbox" id={`checked${student.ID}`} />
                         <span class="slider round"></span>
                       </label>
                     </td>
-                    <td></td>
-                    <td>{item.ID}</td>
+                    <td>
+                      <select id={`select_table${student.ID}`}>
+                        <option>აირჩიეთ ქულა</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </td>
                   </tr>
                 </>
               );
             })}
           </table>
+          <button onClick={saveInformation}>დამატება</button>
         </div>
       </div>
     </>
