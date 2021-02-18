@@ -1,0 +1,31 @@
+.hero__subject1 {
+    position: absolute;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-left: 100px;
+    margin-top: 60px;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .xsom1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+    z-index: -1;
+  }
+  .border__bottom__stylesheet {
+    padding: 8px;
+    border-bottom: 1px solid #dadce0;
+  }
+.th__stylesheet {
+  padding: 8px;
+}
+
+.border__bottom__stylesheet:nth-child(even) {
+    background-color: rgba(94, 148, 250, 0.03);
+}

@@ -1,0 +1,49 @@
+.sidebar {
+    width: 90px;
+    height: 100vh;
+    margin-top: 60px;
+    position: fixed;
+    z-index: 10;
+    background-color: #2e3192;
+}
+._prev-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+._none-p {
+    color: #fff;
+    font-size: 11px;
+    margin-top: 10px;
+    font-family: "BPG Arial Caps", sans-serif;
+}
+._li-flex {
+    height: 80px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e3192;
+    text-align: center;
+}
+.-mtop {
+    margin-top: 15px;
+}
+.active {
+    background-color: #fff !important;
+    color: #252524 !important;
+    margin-left: 10px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    fill: #252524 !important;
+}
+.act {
+    margin-left: 10px;
+}
+.active-cross {
+    color: #252526 !important;
+    fill: #5e94fa !important;
+}

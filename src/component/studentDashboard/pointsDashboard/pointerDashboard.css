@@ -1,0 +1,112 @@
+.content_subject {
+  margin-left: 120px;
+  margin-top: 75px;
+  position: absolute;
+}
+.content__person__information {
+  font-family: "BPG Arial Caps", sans-serif;
+}
+.student-name__content {
+  margin-top: 13px;
+  font-size: 15px;
+  user-select: none;
+}
+.student-detail-information-context {
+  margin-top: 30px;
+  height: calc(100% - 125px);
+  position: relative;
+}
+.student-detail-header {
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #fff;
+}
+.student-detail-header > li {
+  font-size: 12px;
+  color: #000;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #dadce0;
+}
+.student-detail-header > li > label {
+  border-right: 1px solid #dadce0;
+  padding-left: 20px;
+  padding-right: 285px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+}
+._loq > label {
+  padding-right: 20px !important;
+  padding-left: 20px !important;
+}
+/*  */
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  color: #000;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #dadce0;
+  font-weight: lighter;
+  font-family: "BPG Arial Caps", sans-serif;
+  color: #70757a;
+  line-height: 45px;
+  user-select: none;
+  font-size: 12.5px;
+}
+
+#customers tr:nth-child(even) {
+  background-color: rgba(94, 148, 250, 0.03);
+}
+#customers th {
+  padding-right: 208px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  user-select: none;
+  text-align: left;
+  height: 55px;
+  color: #000;
+  font-family: "BPG Arial Caps", sans-serif;
+  font-size: 11.5px;
+  font-weight: lighter;
+}
+
+.back-div-icon {
+  width: 30px;
+  height: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  padding: 0 1px 1px 0;
+  border-radius: 50%;
+  text-decoration-line: none;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(112,117,122,.35);
+}
+
+._back-div-icon-svg {
+  width: 8px;
+  height: 13px;
+  fill: rgba(112,117,122,.35);
+  z-index: 999;
+  transform: rotate(180deg);
+}
+
+._back-ofmlqxml {
+  font-size: 11px;
+  color: #70757a;
+  text-decoration: none;
+  text-decoration-line: none;
+  margin-bottom: 15px;
+  margin-left: 7px;
+  font-family: "BPG Arial Caps", sans-serif;
+}

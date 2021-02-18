@@ -1,0 +1,351 @@
+@import url("//cdn.web-fonts.ge/fonts/bpg-arial-caps/css/bpg-arial-caps.min.css");
+body {
+  background-color: #2e3192;
+}
+._container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100vh;
+}
+.container__child {
+  max-width: 100%;
+  margin-right: 250px;
+  margin-top: 50px;
+}
+.none {
+  display: none;
+}
+
+._input {
+  border: 2px solid #4d50a2;
+  padding-left: 15px;
+  width: 300px;
+  max-width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  font-family: "BPG Arial Caps", sans-serif;
+  color: #a2a4d8;
+  font-size: 14px;
+  background-color: transparent;
+  outline: none;
+}
+._input::placeholder {
+  color: rgb(165, 155, 155);
+}
+.align__center {
+  text-align: center;
+}
+.align__svg {
+  margin: auto;
+  text-align: center;
+  width: 72px;
+  height: 72px;
+  display: flex;
+}
+.author__context {
+  margin-top: 30px;
+  font-size: 22px;
+  color: #f1f3ff;
+  font-family: "BPG Arial Caps", sans-serif;
+  font-weight: lighter;
+  user-select: none;
+}
+.onlineSchool__context {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #f1f3ff;
+  font-weight: lighter;
+  font-family: "BPG Arial Caps", sans-serif;
+}
+.container__form {
+  margin-top: 36px;
+}
+.button__login {
+  border-radius: 22px;
+  height: 45px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #5e94fa;
+  font-family: "BPG Arial Caps", sans-serif;
+  width: 300px;
+  border: none;
+  outline: none;
+  max-width: 100%;
+}
+.image__component {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.teacher__context {
+  font-family: "BPG Arial Caps", sans-serif;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.error {
+  border: 2px solid red;
+}
+._error-paragraph {
+  color: red;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  user-select: none;
+  font-size: 14px;
+  font-family: "BPG Arial Caps", sans-serif;
+  text-align: center;
+  font-weight: lighter;
+}
+._mtop {
+  margin-top: 5px;
+}
+.mtop {
+  margin-top: 15px;
+}
+.error-notification-div {
+  position: fixed;
+  top: 58px;
+  width: 487px;
+  height: 60px;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border: 1px solid rgba(242, 95, 99, 0.5);
+  background-color: #ffe0df;
+  border-radius: 4px;
+  max-width: 100%;
+}
+
+.p__error__notif {
+  color: #f5483a;
+  font-size: 13px;
+  margin-left: 15px;
+  line-height: 1.3;
+  font-family: "BPG Arial Caps", sans-serif;
+}
+
+/* navbar */
+._svg-cqoxn {
+  width: 45px;
+  height: 45px;
+  margin-left: 15px;
+}
+.navbar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  border-bottom: 1px solid #dadce0;
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  background-color: #fff;
+}
+.navbarLeft__content {
+  display: flex;
+  z-index: 5;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+.paragraph__context {
+  font-family: "BPG Arial Caps", sans-serif;
+  margin-right: 15px;
+  font-size: 12px;
+  z-index: 5;
+  color: #878787;
+  user-select: none;
+}
+.fnt {
+  font-size: 9px;
+  margin-bottom: 3px;
+}
+._image-property {
+  border-radius: 100%;
+  width: 42px;
+  height: 42px;
+  z-index: 5;
+  cursor: pointer;
+}
+.li-item {
+  padding-left: 10px;
+  padding-right: 10px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  cursor: pointer;
+  font-family: "BPG Arial Caps", sans-serif;
+}
+.li-item:hover,
+.li-item:hover .i_tag {
+  background-color: #f2f2f4;
+  color: #5e94fa;
+}
+.li-item:hover .span-item {
+  color: #252526;
+}
+.i_tag {
+  font-size: 21px;
+  color: #dadbdc;
+}
+.ul-item {
+  width: 260px;
+  top: 52px;
+  font-size: 11px;
+  z-index: 100;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #dadce0;
+}
+._mleft {
+  margin-right: 5px;
+}
+.navbarLeft__content > p {
+  font-family: "BPG Arial Caps", sans-serif;
+  margin-left: 10px;
+  font-size: 15px;
+}
+.span-item {
+  margin-left: 8px;
+  font-size: 13px;
+  color: #70757a;
+}
+/* spinner */
+.loader,
+.loader:before,
+.loader:after {
+  background: #fff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #fff;
+  text-indent: -9999em;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+  z-index: 999;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: "";
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+
+._width-prop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.51);
+  z-index: 999;
+}
+.content__sidebar {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: none;
+  background-color: #fff;
+  z-index: 999;
+}
+
+.ul-item-sidebar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  flex-direction: column;
+  height: 100vh;
+}
+._li-item {
+  background-color: #2e3192;
+  width: 100%;
+  height: 80px;
+  max-width: 100%;
+  display: flex;
+  border-top: 1px solid #878787;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-direction: column;
+  line-height: 12px;
+  font-size: 15px;
+  cursor: pointer;
+  transition-duration: 0.2s;
+}
+._li-item:hover {
+  opacity: 0.95;
+}
+._li-item > span {
+  margin-top: 13px;
+  font-family: "BPG Arial Caps", sans-serif;
+}
+.x__button_xqml {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: rgb(177, 175, 175);
+  font-size: 26px;
+  right: 0;
+  line-height: 15px;
+  height: 11px;
+  margin: 15px;
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  width: 15px;
+}

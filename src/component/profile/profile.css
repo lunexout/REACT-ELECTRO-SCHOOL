@@ -1,0 +1,56 @@
+.container-user-information {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translate(-50%, -50%);
+}
+.image-container-for-user {
+  height: 200px;
+  cursor: pointer;
+  object-fit: contain;
+  border-radius: 50%;
+}
+.user-information-content {
+  text-align: center;
+  margin-top: 15px;
+  font-family: "BPG Arial Caps", sans-serif;
+  line-height: 1.5;
+}
+.user-information-content > h2 {
+  color: #222;
+  user-select: none;
+}
+.user-information-content > label {
+  color: #666;
+  margin-top: 10px;
+  font-size: 16px;
+}
+._div-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+._div-content > label {
+  color: #222;
+}
+._li-content {
+  border-top: 1px solid #dadce0;
+  background-color: rgba(94,148,250,.03);
+  border-bottom: 1px solid #dadce0;
+  width: 350px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  padding: 10px;
+  font-family: "BPG Arial Caps", sans-serif;
+}
+._ul-content {
+  margin-top: 20px;
+  cursor: pointer;
+}
