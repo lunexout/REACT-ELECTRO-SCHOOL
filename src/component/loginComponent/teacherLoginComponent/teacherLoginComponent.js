@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import db from "../../connectFirebase/firebase";
 import { useHistory } from "react-router-dom";
 import ErrorComponent from "../errorComponent";
+
+import axios from "axios";
 
 export default function TeacherLoginComponent() {
   const [personalTeacherNumber, setPersonalTeacherNumber] = useState("");
@@ -15,8 +17,18 @@ export default function TeacherLoginComponent() {
   const [spinner, setSpinner] = useState(false);
   const teacherPersonalNumber = useRef();
   const teacherPasswordNumber = useRef();
+  const [date, setCurrentDate] = useState("");
 
   const history = useHistory();
+
+  useEffect(async () => {
+    return await axios
+      .get("http://worldclockapi.com/api/json/est/now")
+      .then((response) => {
+        setCurrentDate(response.data.currentDateTime.substring(0, 10));
+      });
+  }, []);
+
   const loginAuthentication = async () => {
     if (!personalTeacherNumber) {
       setTeacherLoginError(true);
@@ -37,19 +49,22 @@ export default function TeacherLoginComponent() {
               data.data().password === teacherPassword &&
               data.data().ID === personalTeacherNumber
             ) {
-              let today = new Date();
-              const date =
-                today.getFullYear() +
-                "-" +
-                (today.getMonth() + 1) +
-                "-" +
-                today.getDate();
+              // let today = new Date();
+              // const date =
+              //   today.getFullYear() +
+              //   "-" +
+              //   (today.getMonth() + 1) +
+              //   "-" +
+              //   today.getDate();
               // const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+              // console.log(date);
               setTeacherAuthenticationError(false);
               localStorage.setItem("login", "logged");
               localStorage.setItem("type", "teacher");
               localStorage.setItem("ID", personalTeacherNumber);
-              localStorage.setItem("user", JSON.stringify(data.data()));
+              const user = data.data();
+              user.password = null;
+              localStorage.setItem("user", JSON.stringify(user));
               localStorage.setItem("todaysDate", date);
               setSpinner(false);
               history.push("/dashboard");

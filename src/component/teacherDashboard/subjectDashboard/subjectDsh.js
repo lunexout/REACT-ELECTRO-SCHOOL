@@ -3,8 +3,13 @@ import Navbar from "./../../navbar/Navbar";
 import Sidebar from "../../sidebar/sidebar";
 import db from "./../../connectFirebase/firebase";
 import { Link } from "react-router-dom";
+import HomeComponent from "../../studentDashboard/HomeComponent/HomeComponent";
+import HomeWorkComponent from "../../studentDashboard/homeWorkComponent/homeWorkComponent";
+
 export default function SubjectDsh({ match }) {
-  console.log(match);
+  const [homeComponent, setHomeComponent] = useState(false);
+  const [subjectComponent, setSubjectComponent] = useState(true);
+  const [homeWorkComponent, setHomeWorkComponent] = useState(false);
   const [subjectList, setSubjectList] = useState([]);
   const [colors, setColors] = useState([
     "rgb(255, 113, 67)",
@@ -67,47 +72,112 @@ export default function SubjectDsh({ match }) {
       });
   }, []);
 
+  const identificationDashboard = () => {
+    if (homeComponent) {
+      return (
+        <>
+          <HomeComponent />
+        </>
+      );
+    }
+    if (subjectComponent) {
+      return (
+        <>
+          <div className="_1cont">
+            <div className="xsom"></div>
+            <div className="hero__container">
+              <div className="context__info">
+                <p className="_class-para">კლასები</p>
+              </div>
+              <div className="xpm1mzl">
+                {subjectList.map((item, i) => {
+                  console.log(item);
+                  return (
+                    <>
+                      <Link
+                        // to={`/dashboard/1/${Math.floor(
+                        //   Math.random() * 1923891238219832
+                        // )}`}
+                        to={`/dashboard/teacher/${match.params.id}/${item.subject_id}/points`}
+                        className="_under"
+                      >
+                        <div
+                          className="hero__subject _under"
+                          style={{
+                            backgroundColor: `${colors[i]}`,
+                            borderLeft: `${borders[i]}`,
+                          }}
+                        >
+                          <i className="fas fa-external-link-alt asodmoasml"></i>
+                          <label className="hero__subject__teacher _under">
+                            საგანი: {item.subject_id}
+                          </label>
+                        </div>
+                      </Link>
+                    </>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </>
+      );
+    }
+    if (homeWorkComponent) {
+      return (
+        <>
+          <HomeWorkComponent />
+        </>
+      );
+    }
+  };
+
+  const showHomeComponent = () => {
+    setHomeComponent(true);
+    setSubjectComponent(false);
+    setHomeWorkComponent(false);
+  };
+  const showSubjectComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(true);
+    setHomeWorkComponent(false);
+  };
+  const showHomeWorkComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(false);
+    setHomeWorkComponent(true);
+  };
+
   return (
     <>
       <Navbar />
-      <div className="_1cont">
-        <Sidebar />
-        <div className="xsom"></div>
-        <div className="hero__container">
-          <div className="context__info">
-            <p className="_class-para">კლასები</p>
-          </div>
-          <div className="xpm1mzl">
-            {subjectList.map((item, i) => {
-              console.log(item);
-              return (
-                <>
-                  <Link
-                    // to={`/dashboard/1/${Math.floor(
-                    //   Math.random() * 1923891238219832
-                    // )}`}
-                    to={`/dashboard/teacher/${match.params.id}/${item.subject_id}/points`}
-                    className="_under"
-                  >
-                    <div
-                      className="hero__subject _under"
-                      style={{
-                        backgroundColor: `${colors[i]}`,
-                        borderLeft: `${borders[i]}`,
-                      }}
-                    >
-                      <i className="fas fa-external-link-alt asodmoasml"></i>
-                      <label className="hero__subject__teacher _under">
-                        საგანი: {item.subject_id}
-                      </label>
-                    </div>
-                  </Link>
-                </>
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      <Sidebar
+        homeComponent={() => showHomeComponent()}
+        homeClassComponent={
+          homeComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeComponentParagraph={
+          homeComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeComponentSVG={homeComponent && "active-cross"}
+        subjectComponent={() => showSubjectComponent()}
+        subjectClassComponent={
+          subjectComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        subjectComponentSVG={subjectComponent && "active-cross"}
+        subjectComponentParagraph={
+          subjectComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeWorkComponent={() => showHomeWorkComponent()}
+        homeWorkClassComponent={
+          homeWorkComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeWorkSVGComponent={homeWorkComponent && "active-cross"}
+        homeWorkParagraphComponent={
+          homeWorkComponent ? "_none-p active-cross" : "_none-p"
+        }
+      />
+      {identificationDashboard()}
     </>
   );
 }

@@ -3,9 +3,15 @@ import Navbar from "../navbar/Navbar";
 import Sidebar from ".././sidebar/sidebar";
 import db from "../connectFirebase/firebase";
 import { Link } from "react-router-dom";
-import './teacherDashboard.css'
+import "./teacherDashboard.css";
+import HomeComponent from "../studentDashboard/HomeComponent/HomeComponent";
+import HomeWorkComponent from "../studentDashboard/homeWorkComponent/homeWorkComponent";
+import SubjectDashboard from "../studentDashboard/subjectComponent/subjectDashboard";
 
 export default function TeacherPage() {
+  const [homeComponent, setHomeComponent] = useState(false);
+  const [subjectComponent, setSubjectComponent] = useState(true);
+  const [homeWorkComponent, setHomeWorkComponent] = useState(false);
   const [classes, setClasses] = useState([]);
   const [colors, setColors] = useState([
     "rgb(255, 113, 67)",
@@ -53,59 +59,127 @@ export default function TeacherPage() {
       });
   }, []);
 
-  return (
-    <>
-      <Navbar />
-      <div className="_1cont">
-        <Sidebar />
-        <div className="xsom"></div>
-        <div className="hero__container">
-          <div className="context__info">
-            <p className="_class-para">კლასები</p>
-          </div>
-          <div className="xpm1mzl">
-            {classes.map((item, i) => {
-              return (
-                <>
-                
-                  {/* <Link
+  const identificationDashboard = () => {
+    if (homeComponent) {
+      return (
+        <>
+          <HomeComponent />
+        </>
+      );
+    }
+    if (subjectComponent) {
+      return (
+        <>
+          <div className="_1cont">
+            <div className="xsom"></div>
+            <div className="hero__container">
+              <div className="context__info">
+                <p className="_class-para">კლასები</p>
+              </div>
+              <div className="xpm1mzl">
+                {classes.map((item, i) => {
+                  return (
+                    <>
+                      {/* <Link
                     to={`/dashboard/teacher/${item.class_id}`}
                     className="_under"
                   > */}
-                    <div
-                      className="hero__subject _under"
-                      style={{
-                        backgroundColor: `${colors[i]}`,
-                        borderLeft: `${borders[i]}`,
-                      }}
-                    >
-                      <Link
-                      to={`/dashboard/teacher/${item.class_id}`}
-                      className="_under"
+                      <div
+                        className="hero__subject _under"
+                        style={{
+                          backgroundColor: `${colors[i]}`,
+                          borderLeft: `${borders[i]}`,
+                        }}
                       >
-                      <i className="fas fa-external-link-alt asodmoasml"></i>
-                      </Link>
-                      <label
-                        className="hero__subject__teacher _under"
-                        key={item.class_id}
-                      >
-                        კლასი: {item.class_id}
-                      </label>
-                      <label
-                        className="hero__subject__teacher _under"
-                        key={item.damrigebeli}
-                      >
-                        დამრიგებელი: {item.damrigebeli}
-                      </label>
-                    <Link to={`/dashboard/teacher/${item.class_id}/table`}><button className="showTableButton">ცხრილის ნახვა</button></Link>
-                    </div>
-                  {/* </Link> */}
-                </>
-              );
-            })}
+                        <Link
+                          to={`/dashboard/teacher/${item.class_id}`}
+                          className="_under"
+                        >
+                          <i className="fas fa-external-link-alt asodmoasml"></i>
+                        </Link>
+                        <label
+                          className="hero__subject__teacher _under"
+                          key={item.class_id}
+                        >
+                          კლასი: {item.class_id}
+                        </label>
+                        <label
+                          className="hero__subject__teacher _under"
+                          key={item.damrigebeli}
+                        >
+                          დამრიგებელი: {item.damrigebeli}
+                        </label>
+                        <Link to={`/dashboard/teacher/${item.class_id}/table`}>
+                          <button className="showTableButton">
+                            ცხრილის ნახვა
+                          </button>
+                        </Link>
+                      </div>
+                      {/* </Link> */}
+                    </>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      );
+    }
+    if (homeWorkComponent) {
+      return (
+        <>
+          <HomeWorkComponent />
+        </>
+      );
+    }
+  };
+
+  const showHomeComponent = () => {
+    setHomeComponent(true);
+    setSubjectComponent(false);
+    setHomeWorkComponent(false);
+  };
+  const showSubjectComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(true);
+    setHomeWorkComponent(false);
+  };
+  const showHomeWorkComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(false);
+    setHomeWorkComponent(true);
+  };
+
+  return (
+    <>
+      <Navbar />
+      <Sidebar
+        homeComponent={() => showHomeComponent()}
+        homeClassComponent={
+          homeComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeComponentParagraph={
+          homeComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeComponentSVG={homeComponent && "active-cross"}
+        subjectComponent={() => showSubjectComponent()}
+        subjectClassComponent={
+          subjectComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        subjectComponentSVG={subjectComponent && "active-cross"}
+        subjectComponentParagraph={
+          subjectComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeWorkComponent={() => showHomeWorkComponent()}
+        homeWorkClassComponent={
+          homeWorkComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeWorkSVGComponent={homeWorkComponent && "active-cross"}
+        homeWorkParagraphComponent={
+          homeWorkComponent ? "_none-p active-cross" : "_none-p"
+        }
+      />
+      {identificationDashboard()}
     </>
   );
 }

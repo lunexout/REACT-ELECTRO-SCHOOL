@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import TeacherLoginComponent from "./teacherLoginComponent/teacherLoginComponent";
 import db from "../connectFirebase/firebase";
 import { useHistory } from "react-router-dom";
-import ErrorComponent from './errorComponent';
+import ErrorComponent from "./errorComponent";
 
 export default function Login() {
   const [personalNumber, setPersonalNumber] = useState("");
@@ -44,7 +44,10 @@ export default function Login() {
               localStorage.setItem("login", "logged");
               localStorage.setItem("type", "student");
               localStorage.setItem("ID", personalNumber);
-              localStorage.setItem("user", JSON.stringify(data.data()));
+              const user = data.data();
+              user.password = null;
+              localStorage.setItem("user", JSON.stringify(user));
+              // localStorage.setItem("user", user);
               setSpinner(false);
               history.push("/dashboard");
             } else {
@@ -58,7 +61,19 @@ export default function Login() {
   };
 
   const renderAuthenticationErrorContent = () => {
-    return <>{authenticationError && <>{<ErrorComponent authentication={() => setAuthenticationError(false)} />}</>}</>;
+    return (
+      <>
+        {authenticationError && (
+          <>
+            {
+              <ErrorComponent
+                authentication={() => setAuthenticationError(false)}
+              />
+            }
+          </>
+        )}
+      </>
+    );
   };
   return (
     <>

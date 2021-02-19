@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ErrorComponent({authentication}) {
+export default function ErrorComponent({ authentication }) {
   return (
     <>
       <div className="error-notification-div">
@@ -24,7 +24,7 @@ export default function ErrorComponent({authentication}) {
           </g>
         </svg>
         <p className="p__error__notif">დაფიქსირდა შეცდომა!</p>
-
+        {/* <img width="20" height="20" src="https://cyso.ge/domainlogo.png"></img> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           version="1.1"

@@ -1,9 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
-
+import React, { useEffect, useRef, useState } from "react";
+import HomeComponent from "../studentDashboard/HomeComponent/HomeComponent";
 import Navbar from "./../navbar/Navbar";
 import Sidebar from "./../sidebar/sidebar";
 import db from "./../connectFirebase/firebase";
 import "./changePoints.css";
+import HomeWorkComponent from "../studentDashboard/homeWorkComponent/homeWorkComponent";
+import SubjectDashboard from "../teacherDashboard/teacherDashboard";
+
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { useHistory } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function ({ match }) {
   const [students, setStudents] = useState([]);
@@ -11,6 +18,17 @@ export default function ({ match }) {
   const [user, setUser] = useState([]);
   const [points, setPoints] = useState([]);
   const [spinner, setSpinner] = useState(false);
+  const [homeComponent, setHomeComponent] = useState(false);
+  const [subjectComponent, setSubjectComponent] = useState(true);
+  const [homeWorkComponent, setHomeWorkComponent] = useState(false);
+
+  const [toggleNextSave, setToggleNextSave] = useState(true);
+
+  const history = useHistory();
+
+  const pointTHRef = useRef();
+  const pointTablesRef = useRef([]);
+  const checkboxTablesRef = useRef([]);
 
   useEffect(() => {
     db.collection("Teachers")
@@ -162,8 +180,13 @@ export default function ({ match }) {
     });
 
     if (isError) {
-      alert("sheivsos velebi");
+      Swal.fire(
+        "გთხოვთ შეავსოთ ყველა ნიშნის ველი",
+        localStorage.getItem("todaysDate"),
+        "error"
+      );
     } else {
+      localStorage.setItem("Swrebadoba", true);
       setSpinner(true);
       pointTable.map(async (item) => {
         return await db
@@ -212,67 +235,227 @@ export default function ({ match }) {
             });
           });
       });
+      Swal.fire(
+        "ნიშნები წარმატებით დაემატა",
+        localStorage.getItem("todaysDate"),
+        "success"
+      );
       setSpinner(false);
     }
+  };
+
+  const identificationDashboard = () => {
+    if (homeComponent) {
+      return (
+        <>
+          <HomeComponent />
+        </>
+      );
+    }
+
+    function onClickNext() {
+      setToggleNextSave(false);
+      var pointTable = [];
+      var isError = false;
+
+      pointTHRef.current.style.display = "block";
+      user.map((user) => {
+        var check = document.getElementById(`checked${user.ID}`).checked;
+        if (check == true) {
+          pointTablesRef.current[user.ID].style.display = "block";
+        } else {
+          pointTablesRef.current[user.ID].style.display = "none";
+          checkboxTablesRef.current[user.ID].style.display = "none";
+        }
+      });
+    }
+
+    if (SubjectDashboard) {
+      return (
+        <>
+          {localStorage.getItem("Swrebadoba") ? (
+            (console.log(1), history.push({ pathname: "/dashboard" }))
+          ) : (
+            <>
+              <div className="xsom"></div>
+              <div className="hero__container" style={{ position: "absolute" }}>
+                <div className="dateCenter">
+                  <Typography align="center">
+                    {localStorage.getItem("todaysDate")}
+                  </Typography>
+                </div>
+                {/* <div style={{ textAlign: "center" }}>
+              {localStorage.getItem("todaysDate")}
+            </div> */}
+                <div className="user-information">
+                  {spinner && (
+                    <div className="_width-prop">
+                      <div className="loader"></div>
+                    </div>
+                  )}
+                  <tbody className="students" id="customers">
+                    <tr>
+                      <th style={{ textAlign: "center !important" }}>
+                        სახელი გვარი
+                      </th>
+                      {/* <th>სახელი გვარი</th> */}
+                      <th>სწრებადობა</th>
+                      <th ref={pointTHRef} style={{ display: "none" }}>
+                        ქულა
+                      </th>
+                    </tr>
+                    {user.map((student, i) => {
+                      return (
+                        <>
+                          <tr
+                            ref={(el) =>
+                              (checkboxTablesRef.current[student.ID] = el)
+                            }
+                          >
+                            <td style={{ textAlign: "left" }}>
+                              <div style={{ display: "flex" }}>
+                                <div style={{ flex: ".5" }}>
+                                  <img
+                                    width="55"
+                                    height="55"
+                                    style={{
+                                      borderRadius: "50%",
+                                      display: "inline-block",
+                                    }}
+                                    src={student.image}
+                                  />
+                                </div>
+                                <div
+                                  style={{
+                                    flex: "1",
+                                    display: "inline-block",
+                                  }}
+                                >
+                                  {student.name} {student.surname}
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <label className="switch">
+                                <input
+                                  type="checkbox"
+                                  id={`checked${student.ID}`}
+                                />
+                                <span className="slider round"></span>
+                              </label>
+                            </td>
+                            <td
+                              ref={(el) =>
+                                (pointTablesRef.current[student.ID] = el)
+                              }
+                              style={{ display: "none" }}
+                            >
+                              <select
+                                className="custom-select"
+                                id={`select_table${student.ID}`}
+                              >
+                                <option>აირჩიეთ ქულა</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                              </select>
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })}
+                  </tbody>
+                  {toggleNextSave ? (
+                    <>
+                      <Button
+                        onClick={onClickNext}
+                        m={3}
+                        variant="contained"
+                        color="primary"
+                      >
+                        შემდეგი
+                      </Button>
+                    </>
+                  ) : (
+                    <Button
+                      onClick={saveInformation}
+                      m={3}
+                      variant="contained"
+                      color="primary"
+                    >
+                      შედეგების შენახვა
+                    </Button>
+                  )}
+                  {/* <button onClick={saveInformation}>დამატება</button> */}
+                </div>
+              </div>
+            </>
+          )}
+        </>
+      );
+    }
+    if (homeWorkComponent) {
+      return (
+        <>
+          <HomeWorkComponent />
+        </>
+      );
+    }
+  };
+
+  const showHomeComponent = () => {
+    setHomeComponent(true);
+    setSubjectComponent(false);
+    setHomeWorkComponent(false);
+  };
+  const showSubjectComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(true);
+    setHomeWorkComponent(false);
+  };
+  const showHomeWorkComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(false);
+    setHomeWorkComponent(true);
   };
 
   return (
     <>
       <Navbar />
-      <Sidebar />
-      <div className="xsom"></div>
-      <div className="hero__container" style={{ position: "absolute" }}>
-        <div style={{ textAlign: "center" }}>
-          {localStorage.getItem("todaysDate")}
-        </div>
-        <div className="user-information">
-          {spinner && (
-            <div className="_width-prop">
-              <div className="loader"></div>
-            </div>
-          )}
-          <table className="students" id="customers">
-            <tr>
-              <th>სახელი გვარი</th>
-              <th>სწრებადობა</th>
-              <th>ქულა</th>
-            </tr>
-            {user.map((student) => {
-              return (
-                <>
-                  <tr>
-                    <td>
-                      {student.name} {student.surname}
-                    </td>
-                    <td>
-                      <label class="switch">
-                        <input type="checkbox" id={`checked${student.ID}`} />
-                        <span class="slider round"></span>
-                      </label>
-                    </td>
-                    <td>
-                      <select id={`select_table${student.ID}`}>
-                        <option>აირჩიეთ ქულა</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                      </select>
-                    </td>
-                  </tr>
-                </>
-              );
-            })}
-          </table>
-          <button onClick={saveInformation}>დამატება</button>
-        </div>
-      </div>
+      <Sidebar
+        homeComponent={() => showHomeComponent()}
+        homeClassComponent={
+          homeComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeComponentParagraph={
+          homeComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeComponentSVG={homeComponent && "active-cross"}
+        subjectComponent={() => showSubjectComponent()}
+        subjectClassComponent={
+          subjectComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        subjectComponentSVG={subjectComponent && "active-cross"}
+        subjectComponentParagraph={
+          subjectComponent ? "_none-p active-cross" : "_none-p"
+        }
+        homeWorkComponent={() => showHomeWorkComponent()}
+        homeWorkClassComponent={
+          homeWorkComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        homeWorkSVGComponent={homeWorkComponent && "active-cross"}
+        homeWorkParagraphComponent={
+          homeWorkComponent ? "_none-p active-cross" : "_none-p"
+        }
+      />
+      {identificationDashboard()}
     </>
   );
 }

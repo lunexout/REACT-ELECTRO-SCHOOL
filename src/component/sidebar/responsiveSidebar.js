@@ -1,14 +1,11 @@
 import React from "react";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-export default function ResponsiveSidebar({auth}) {
-    const history = useHistory();
+export default function ResponsiveSidebar({ auth }) {
+  const history = useHistory();
   return (
     <>
-      <button
-        onClick={auth}
-        className="x__button_xqml"
-      >
+      <button onClick={auth} className="x__button_xqml">
         ×
       </button>
       <div className="content__sidebar">
@@ -54,21 +51,21 @@ export default function ResponsiveSidebar({auth}) {
               <path
                 id="Rectangle_1642"
                 d="M0 0h10.634v1.745H0z"
-                class="cls-1"
+                className="cls-1"
                 data-name="Rectangle 1642"
                 transform="translate(5.558)"
               ></path>
               <path
                 id="Rectangle_1643"
                 d="M0 0h15.797v1.745H0z"
-                class="cls-1"
+                className="cls-1"
                 data-name="Rectangle 1643"
                 transform="translate(2.975 3.49)"
               ></path>
               <path
                 id="Path_1126"
                 d="M0 8.022v14.771h21.75V8.022zm20.01 13.031H1.74V9.762h18.27z"
-                class="cls-1"
+                className="cls-1"
                 data-name="Path 1126"
                 transform="translate(0 -1.043)"
               ></path>
@@ -92,13 +89,23 @@ export default function ResponsiveSidebar({auth}) {
               style={{ width: "18px", height: "18px", fill: "#fff" }}
             >
               <g>
-                <rect y="49.8" class="st0" width="166.8" height="27.9"></rect>
+                <rect
+                  y="49.8"
+                  className="st0"
+                  width="166.8"
+                  height="27.9"
+                ></rect>
                 <polygon
-                  class="st0"
+                  className="st0"
                   points="154.5,106.5 134.5,86.4 114.8,106.2 154.5,145.9 210.4,90.1 190.7,70.4  "
                 ></polygon>
-                <rect class="st0" width="166.8" height="27.9"></rect>
-                <rect y="95.5" class="st0" width="85.5" height="27.9"></rect>
+                <rect className="st0" width="166.8" height="27.9"></rect>
+                <rect
+                  y="95.5"
+                  className="st0"
+                  width="85.5"
+                  height="27.9"
+                ></rect>
               </g>
             </svg>
             <span>დავალებები</span>

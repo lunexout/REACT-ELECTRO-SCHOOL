@@ -57,19 +57,19 @@ export default function App() {
             <div className="content__person__information">
               <p>{localStorage.getItem("subject_id")}</p>
               <p className="student-name__content">{`${user.name} ${user.surname}`}</p>
-              <table id="customers">
+              <tbody id="customers">
                 <tr>
                   <th>#</th>
                   <th>დღე</th>
                   <th>მასწავლებელი</th>
                   <th>დასწრება</th>
-                  <th>განმავითარებელი შეფასება</th>
+                  {/* <th>განმავითარებელი შეფასება</th> */}
                   <th>შეფასება</th>
                 </tr>
                 {point.map((item, i) => {
                   return (
                     <>
-                      <tr>
+                      <tr key={i.toString()}>
                         <td>{i}</td>
                         <td>{`${item.date}`}</td>
                         <td>
@@ -80,13 +80,13 @@ export default function App() {
                           )}
                         </td>
                         <td>{item.checked}</td>
-                        <td>{item.point}</td>
+                        {/* <td>{item.point}</td>   */}
                         <td>{item.point}</td>
                       </tr>
                     </>
                   );
                 })}
-              </table>
+              </tbody>
             </div>
           </div>
         </>

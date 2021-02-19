@@ -30,38 +30,34 @@ export default function Profile() {
       <Sidebar />
       <div className="xsom"></div>
       <div className="container-user-information">
-        <img
-          src="https://onlineschool.emis.ge/assets/images/pattern.png"
-          alt=""
-          className="image-container-for-user"
-        />
+        <img src={user.image} alt="" className="image-container-for-user" />
         <div className="user-information-content">
           <h2>{`${user.name} ${user.surname}`}</h2>
           <label className="_label-cont">{`(${user.role})`}</label>
         </div>
-        <ul className="_ul-content" style={{listStyle: "none"}}>
-            <li className="_li-content">
-              <div className="_div-content">
-                <label>კლასი: </label>
-                <label>
-                  {post.map((item) => {
-                    return <>{item.class_id}</>;
-                  })}
-                </label>
-              </div>
-            </li>
-            <br />
-            <li className="_li-content">
-              <div className="_div-content">
-                <label>პირადი ნომერი: </label>
-                <label>
-                  {post.map((item) => {
-                    return <>{user.ID}</>;
-                  })}
-                </label>
-              </div>
-            </li>
-          </ul>
+        <ul className="_ul-content" style={{ listStyle: "none" }}>
+          <li className="_li-content">
+            <div className="_div-content">
+              <label>კლასი: </label>
+              <label>
+                {post.map((item) => {
+                  return <>{item.class_id}</>;
+                })}
+              </label>
+            </div>
+          </li>
+          <br />
+          <li className="_li-content">
+            <div className="_div-content">
+              <label>პირადი ნომერი: </label>
+              <label>
+                {post.map((item) => {
+                  return <>{user.ID}</>;
+                })}
+              </label>
+            </div>
+          </li>
+        </ul>
       </div>
     </>
   );
