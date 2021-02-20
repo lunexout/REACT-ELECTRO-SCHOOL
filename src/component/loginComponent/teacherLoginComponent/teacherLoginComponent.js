@@ -21,10 +21,9 @@ export default function TeacherLoginComponent() {
 
   const history = useHistory();
 
-  useEffect(async () => {
-    return await axios
-      .get("http://worldclockapi.com/api/json/est/now")
-      .then((response) => {
+  useEffect(() => {
+    axios.get("http://worldclockapi.com/api/json/est/now")
+        .then((response) => {
         setCurrentDate(response.data.currentDateTime.substring(0, 10));
       });
   }, []);
