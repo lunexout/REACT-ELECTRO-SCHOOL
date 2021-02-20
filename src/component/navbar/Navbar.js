@@ -37,6 +37,7 @@ export default function Navbar() {
               localStorage.removeItem("user");
               localStorage.removeItem("ID");
               localStorage.removeItem("type");
+              localStorage.removeItem("todaysDate")
 
               history.push("/");
             }}

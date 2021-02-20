@@ -149,7 +149,18 @@ export default function ({ match }) {
       var a = document.getElementById(`select_table${user.ID}`).value;
       var check = document.getElementById(`checked${user.ID}`).checked;
 
-      if (a == "აირჩიეთ ქულა") {
+      if(a == "აირჩიეთ ქულა" && check === false ){
+        swrebadoba = "არა";
+        pointTable.push({
+          student_id: `${user.ID}`,
+          checked: `${swrebadoba}`,
+          point: null,
+          date: localStorage.getItem("todaysDate"),
+          class_id: match.params.id,
+          teacher_id: localStorage.getItem("ID"),
+          subject_id: match.params.subject,
+        });
+      } else if (a == "აირჩიეთ ქულა") {
         console.log("ukacravad sheavset " + user.name + " " + "- s  veli");
         isError = true;
       } else {
@@ -164,18 +175,19 @@ export default function ({ match }) {
             teacher_id: localStorage.getItem("ID"),
             subject_id: match.params.subject,
           });
-        } else {
-          swrebadoba = "არა";
-          pointTable.push({
-            student_id: `${user.ID}`,
-            checked: `${swrebadoba}`,
-            point: `${a}`,
-            date: localStorage.getItem("todaysDate"),
-            class_id: match.params.id,
-            teacher_id: localStorage.getItem("ID"),
-            subject_id: match.params.subject,
-          });
-        }
+        } 
+        // else {
+        //   swrebadoba = "არა";
+        //   pointTable.push({
+        //     student_id: `${user.ID}`,
+        //     checked: `${swrebadoba}`,
+        //     point: `${a}`,
+        //     date: localStorage.getItem("todaysDate"),
+        //     class_id: match.params.id,
+        //     teacher_id: localStorage.getItem("ID"),
+        //     subject_id: match.params.subject,
+        //   });
+        // }
       }
     });
 
@@ -299,7 +311,7 @@ export default function ({ match }) {
                         სახელი გვარი
                       </th>
                       {/* <th>სახელი გვარი</th> */}
-                      <th>სწრებადობა</th>
+                      <th>სწრებადობა&nbsp;&nbsp;-&nbsp;&nbsp;კი / არა</th>
                       <th ref={pointTHRef} style={{ display: "none" }}>
                         ქულა
                       </th>
@@ -341,7 +353,7 @@ export default function ({ match }) {
                                   type="checkbox"
                                   id={`checked${student.ID}`}
                                 />
-                                <span className="slider round"></span>
+                                <span className="slider round" style={{ backgroundColor: 'red'}}></span>
                               </label>
                             </td>
                             <td

@@ -1,4 +1,4 @@
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 import React, { useEffect, useState } from "react";
 import Navbar from "../../navbar/Navbar";
 import Sidebar from "../../sidebar/sidebar";
@@ -17,6 +17,7 @@ export default function App() {
   const [homeComponent, setHomeComponent] = useState(false);
   const [subjectComponent, setSubjectComponent] = useState(true);
   const [homeWorkComponent, setHomeWorkComponent] = useState(false);
+
   const identificationDashboard = () => {
     if (homeComponent) {
       return (
@@ -60,6 +61,7 @@ export default function App() {
               <tbody id="customers">
                 <tr>
                   <th>#</th>
+                  {/* <th>საგანი</th> */}
                   <th>დღე</th>
                   <th>მასწავლებელი</th>
                   <th>დასწრება</th>
@@ -71,6 +73,7 @@ export default function App() {
                     <>
                       <tr key={i.toString()}>
                         <td>{i}</td>
+                        {/* <td>{localStorage.getItem("subject_id")}</td> */}
                         <td>{`${item.date}`}</td>
                         <td>
                           {teachers.map(
@@ -79,9 +82,17 @@ export default function App() {
                               `${data.name} ${data.surname}`
                           )}
                         </td>
-                        <td>{item.checked}</td>
+                        {item.checked == 'არა' ? 
+                        <>
+                          <td style={{color: 'red'}}>არ ესწრებოდა</td>
+                          <td>შეფასება არ აქვს</td>
+                        </> : 
+                        <>
+                          <td style={{color: 'green'}}>ესწრებოდა</td>
+                          <td>{item.point}</td>
+                        </>}
                         {/* <td>{item.point}</td>   */}
-                        <td>{item.point}</td>
+                        
                       </tr>
                     </>
                   );

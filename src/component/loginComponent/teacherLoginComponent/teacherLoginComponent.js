@@ -65,7 +65,7 @@ export default function TeacherLoginComponent() {
               const user = data.data();
               user.password = null;
               localStorage.setItem("user", JSON.stringify(user));
-              localStorage.setItem("todaysDate", date);
+              localStorage.setItem("todaysDate", JSON.stringify(date));
               setSpinner(false);
               history.push("/dashboard");
             } else {
