@@ -20,6 +20,7 @@
   font-family: "BPG Arial Caps", sans-serif;
   justify-content: flex-start;
   margin: 10px 20px auto;
+  cursor: pointer !important;
 }
 .xpm1mzl {
   display: flex;

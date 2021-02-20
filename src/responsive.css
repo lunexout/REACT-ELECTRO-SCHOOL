@@ -17,7 +17,7 @@
   .image__component {
     display: none;
   }
-    .container__child {
+  .container__child {
     margin-right: 0;
     margin-top: 0px;
     justify-content: center;
@@ -53,6 +53,11 @@
   }
   #customers td {
     font-size: 12px;
+  }
+}
+@media all and (max-width: 515px) {
+  .error-notification-div {
+    right: 0;
   }
 }
 @media all and (max-width: 508px) {
@@ -91,12 +96,12 @@
   }
 }
 @media all and (max-width: 393px) {
-   .form__input {
-       width: 300px;
-   } 
-   ._btn_change {
-       width: 300px;
-   }
+  .form__input {
+    width: 300px;
+  }
+  ._btn_change {
+    width: 300px;
+  }
 }
 @media all and (max-width: 323px) {
   .ul-item {
@@ -107,17 +112,17 @@
   }
   .form__input {
     width: 250px;
-} 
-._btn_change {
+  }
+  ._btn_change {
     width: 250px;
-}
+  }
 }
 
 @media all and (max-width: 269px) {
-    .form__input {
-        width: 200px;
-    }
-    ._btn_change {
-        width: 200px;
-    }
+  .form__input {
+    width: 200px;
+  }
+  ._btn_change {
+    width: 200px;
+  }
 }

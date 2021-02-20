@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import db from "../../connectFirebase/firebase";
 import { useHistory } from "react-router-dom";
 import ErrorComponent from "../errorComponent";
-
-import axios from "axios";
+import firebase from "firebase";
 
 export default function TeacherLoginComponent() {
   const [personalTeacherNumber, setPersonalTeacherNumber] = useState("");
@@ -21,12 +20,7 @@ export default function TeacherLoginComponent() {
 
   const history = useHistory();
 
-  useEffect(() => {
-    axios.get("http://worldclockapi.com/api/json/est/now")
-        .then((response) => {
-        setCurrentDate(response.data.currentDateTime.substring(0, 10));
-      });
-  }, []);
+  // useEffect(() => {}, []);
 
   const loginAuthentication = async () => {
     if (!personalTeacherNumber) {
@@ -57,14 +51,19 @@ export default function TeacherLoginComponent() {
               //   today.getDate();
               // const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
               // console.log(date);
+
               setTeacherAuthenticationError(false);
+
               localStorage.setItem("login", "logged");
               localStorage.setItem("type", "teacher");
               localStorage.setItem("ID", personalTeacherNumber);
               const user = data.data();
               user.password = null;
               localStorage.setItem("user", JSON.stringify(user));
-              localStorage.setItem("todaysDate", JSON.stringify(date));
+              localStorage.setItem(
+                "todaysDate",
+                new Date().toLocaleDateString().replaceAll("/", "-")
+              );
               setSpinner(false);
               history.push("/dashboard");
             } else {
@@ -83,6 +82,7 @@ export default function TeacherLoginComponent() {
           <div className="loader"></div>
         </div>
       )}
+
       <input
         type="text"
         maxLength="15"
@@ -101,13 +101,13 @@ export default function TeacherLoginComponent() {
           setPersonalTeacherNumber(e.target.value);
         }}
       />
+      <br />
       {teacherLoginError ? (
         <>
           <p className="_error-paragraph">შეიყვანეთ პირადი ნომერი</p>
         </>
       ) : (
         <>
-          <br />
           <br />
         </>
       )}
@@ -118,7 +118,7 @@ export default function TeacherLoginComponent() {
         autoComplete="off"
         ref={teacherPasswordNumber}
         spellCheck="false"
-        className={teacherPasswordError ? "_input error" : "_input _mtop"}
+        className={teacherPasswordError ? "_input error" : "_input"}
         id="teacher__password"
         placeholder="პაროლი"
         aria-label="Password"
@@ -132,7 +132,6 @@ export default function TeacherLoginComponent() {
       ) : (
         <>
           <br />
-          <br />
         </>
       )}
       {teacherAuthenticationError && (
@@ -144,7 +143,7 @@ export default function TeacherLoginComponent() {
         onClick={loginAuthentication}
         type="submit"
         className={
-          teacherAuthenticationError ? "button__login" : "button__login"
+          teacherAuthenticationError ? "button__login" : "mtop button__login"
         }
       >
         შესვლა

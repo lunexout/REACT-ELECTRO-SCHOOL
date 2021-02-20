@@ -149,12 +149,13 @@ export default function ({ match }) {
       var a = document.getElementById(`select_table${user.ID}`).value;
       var check = document.getElementById(`checked${user.ID}`).checked;
 
-      if(a == "აირჩიეთ ქულა" && check === false ){
+      if (a == "აირჩიეთ ქულა" && check === false) {
         swrebadoba = "არა";
         pointTable.push({
           student_id: `${user.ID}`,
           checked: `${swrebadoba}`,
           point: null,
+          // date: "12/1/2020",
           date: localStorage.getItem("todaysDate"),
           class_id: match.params.id,
           teacher_id: localStorage.getItem("ID"),
@@ -170,12 +171,13 @@ export default function ({ match }) {
             student_id: `${user.ID}`,
             checked: `${swrebadoba}`,
             point: `${a}`,
+            // date: "12/1/2020",
             date: localStorage.getItem("todaysDate"),
             class_id: match.params.id,
             teacher_id: localStorage.getItem("ID"),
             subject_id: match.params.subject,
           });
-        } 
+        }
         // else {
         //   swrebadoba = "არა";
         //   pointTable.push({
@@ -348,12 +350,18 @@ export default function ({ match }) {
                               </div>
                             </td>
                             <td>
-                              <label className="switch">
+                              <label class="switch">
                                 <input
+                                  class="switch-input"
                                   type="checkbox"
                                   id={`checked${student.ID}`}
                                 />
-                                <span className="slider round" style={{ backgroundColor: 'red'}}></span>
+                                <span
+                                  class="switch-label"
+                                  data-on="კი"
+                                  data-off="არა"
+                                ></span>
+                                <span class="switch-handle"></span>
                               </label>
                             </td>
                             <td
@@ -390,6 +398,7 @@ export default function ({ match }) {
                         onClick={onClickNext}
                         m={3}
                         variant="contained"
+                        style={{ fontFamily: "BPG Arial Caps" }}
                         color="primary"
                       >
                         შემდეგი

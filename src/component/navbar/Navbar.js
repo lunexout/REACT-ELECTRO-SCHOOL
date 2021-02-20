@@ -18,7 +18,12 @@ export default function Navbar() {
     return (
       <>
         <ul className="ul-item">
-          <li className="li-item">
+          <li
+            className="li-item"
+            onClick={() => {
+              history.push("/profile");
+            }}
+          >
             <i className="fas fa-user-circle i_tag"></i>
             <span className="span-item">პირადი ინფორმაცია</span>
           </li>
@@ -37,7 +42,7 @@ export default function Navbar() {
               localStorage.removeItem("user");
               localStorage.removeItem("ID");
               localStorage.removeItem("type");
-              localStorage.removeItem("todaysDate")
+              localStorage.removeItem("todaysDate");
 
               history.push("/");
             }}

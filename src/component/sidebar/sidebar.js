@@ -1,8 +1,25 @@
 import React from "react";
 import "./sidebar.css";
+import ScheduleIcon from "@material-ui/icons/Schedule";
 
-
-export default function Sidebar({ homeComponent, homeClassComponent, homeComponentParagraph, homeComponentSVG, subjectComponent, subjectClassComponent, subjectComponentSVG, subjectComponentParagraph, homeWorkComponent, homeWorkClassComponent, homeWorkSVGComponent, homeWorkParagraphComponent }) {
+export default function Sidebar({
+  homeComponent,
+  homeClassComponent,
+  homeComponentParagraph,
+  homeComponentSVG,
+  subjectComponent,
+  subjectClassComponent,
+  subjectComponentSVG,
+  subjectComponentParagraph,
+  homeWorkComponent,
+  homeWorkClassComponent,
+  homeWorkSVGComponent,
+  homeWorkParagraphComponent,
+  tableComponent,
+  tableSVGComponent,
+  tableClassComponent,
+  tableClassWorkComponent,
+}) {
   return (
     <>
       <div className="sidebar">
@@ -88,6 +105,15 @@ export default function Sidebar({ homeComponent, homeClassComponent, homeCompone
                 </g>
               </svg>
               <p className={homeWorkParagraphComponent}>დავალებები</p>
+            </div>
+          </li>
+          <li className={tableComponent} onClick={tableClassWorkComponent}>
+            <div className="_prev-flex">
+              <ScheduleIcon
+                className={tableSVGComponent}
+                style={{ width: "25px", height: "25px", color: "#fff" }}
+              />
+              <p className={tableClassComponent}>ცხრილი</p>
             </div>
           </li>
         </ul>

@@ -1,6 +1,6 @@
 @import url("//cdn.web-fonts.ge/fonts/bpg-arial-caps/css/bpg-arial-caps.min.css");
 body {
-  background-color: #2e3192;
+  background-color: #f1f2f5;
 }
 ._container {
   display: flex;
@@ -20,14 +20,14 @@ body {
 }
 
 ._input {
-  border: 2px solid #4d50a2;
+  border: 2px solid #cccccc;
   padding-left: 15px;
   width: 300px;
   max-width: 100%;
   height: 50px;
   border-radius: 25px;
   font-family: "BPG Arial Caps", sans-serif;
-  color: #a2a4d8;
+  color: #2f2e41;
   font-size: 14px;
   background-color: transparent;
   outline: none;
@@ -48,7 +48,7 @@ body {
 .author__context {
   margin-top: 30px;
   font-size: 22px;
-  color: #f1f3ff;
+  color: #2f2e41;
   font-family: "BPG Arial Caps", sans-serif;
   font-weight: lighter;
   user-select: none;
@@ -56,7 +56,7 @@ body {
 .onlineSchool__context {
   margin-top: 10px;
   font-size: 16px;
-  color: #f1f3ff;
+  color: #2f2e41;
   font-weight: lighter;
   font-family: "BPG Arial Caps", sans-serif;
 }
@@ -69,12 +69,16 @@ body {
   font-size: 14px;
   cursor: pointer;
   color: #fff;
-  background-color: #5e94fa;
+  background-color: #6c63ff;
   font-family: "BPG Arial Caps", sans-serif;
   width: 300px;
+  transition-duration: 0.2s;
   border: none;
   outline: none;
   max-width: 100%;
+}
+.button__login:hover {
+  background-color: #6c70ff;
 }
 .image__component {
   height: 100%;
@@ -85,7 +89,7 @@ body {
 .teacher__context {
   font-family: "BPG Arial Caps", sans-serif;
   text-align: center;
-  color: #fff;
+  color: #2f2e41;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,7 +120,7 @@ body {
   top: 58px;
   width: 487px;
   height: 60px;
-  right: 0;
+  right: 15px;
   z-index: 999;
   display: flex;
   align-items: center;
@@ -174,6 +178,7 @@ body {
 ._image-property {
   border-radius: 100%;
   width: 42px;
+  object-fit: cover;
   height: 42px;
   z-index: 5;
   cursor: pointer;

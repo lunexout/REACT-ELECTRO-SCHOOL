@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import "./teacherDashboard.css";
 import HomeComponent from "../studentDashboard/HomeComponent/HomeComponent";
 import HomeWorkComponent from "../studentDashboard/homeWorkComponent/homeWorkComponent";
-import SubjectDashboard from "../studentDashboard/subjectComponent/subjectDashboard";
+import ScheduleComponent from "../studentDashboard/scheduleComponent/scheduleComponent";
 
 export default function TeacherPage() {
   const [homeComponent, setHomeComponent] = useState(false);
   const [subjectComponent, setSubjectComponent] = useState(true);
   const [homeWorkComponent, setHomeWorkComponent] = useState(false);
+  const [scheduleComponent, setScheduleComponent] = useState(false);
   const [classes, setClasses] = useState([]);
   const [colors, setColors] = useState([
     "rgb(255, 113, 67)",
@@ -84,37 +85,39 @@ export default function TeacherPage() {
                     to={`/dashboard/teacher/${item.class_id}`}
                     className="_under"
                   > */}
-                      <div
-                        className="hero__subject _under"
-                        style={{
-                          backgroundColor: `${colors[i]}`,
-                          borderLeft: `${borders[i]}`,
-                        }}
+
+                      <Link
+                        to={`/dashboard/teacher/${item.class_id}`}
+                        className="_under"
                       >
-                        <Link
-                          to={`/dashboard/teacher/${item.class_id}`}
-                          className="_under"
+                        <div
+                          className="hero__subject _under"
+                          style={{
+                            backgroundColor: `${colors[i]}`,
+                            borderLeft: `${borders[i]}`,
+                          }}
                         >
                           <i className="fas fa-external-link-alt asodmoasml"></i>
-                        </Link>
-                        <label
-                          className="hero__subject__teacher _under"
-                          key={item.class_id}
-                        >
-                          კლასი: {item.class_id}
-                        </label>
-                        <label
-                          className="hero__subject__teacher _under"
-                          key={item.damrigebeli}
-                        >
-                          დამრიგებელი: {item.damrigebeli}
-                        </label>
-                        <Link to={`/dashboard/teacher/${item.class_id}/table`}>
+
+                          <label
+                            className="hero__subject__teacher _under"
+                            key={item.class_id}
+                          >
+                            კლასი: {item.class_id}
+                          </label>
+                          <label
+                            className="hero__subject__teacher _under"
+                            key={item.damrigebeli}
+                          >
+                            დამრიგებელი: {item.damrigebeli}
+                          </label>
+                          {/* <Link to={`/dashboard/teacher/${item.class_id}/table`}>
                           <button className="showTableButton">
                             ცხრილის ნახვა
                           </button>
-                        </Link>
-                      </div>
+                        </Link> */}
+                        </div>
+                      </Link>
                       {/* </Link> */}
                     </>
                   );
@@ -132,22 +135,39 @@ export default function TeacherPage() {
         </>
       );
     }
+    if (scheduleComponent) {
+      return (
+        <>
+          <ScheduleComponent />
+        </>
+      );
+    }
   };
 
   const showHomeComponent = () => {
     setHomeComponent(true);
     setSubjectComponent(false);
     setHomeWorkComponent(false);
+    setScheduleComponent(false);
   };
   const showSubjectComponent = () => {
     setHomeComponent(false);
     setSubjectComponent(true);
     setHomeWorkComponent(false);
+    setScheduleComponent(false);
   };
   const showHomeWorkComponent = () => {
     setHomeComponent(false);
     setSubjectComponent(false);
     setHomeWorkComponent(true);
+    setScheduleComponent(false);
+  };
+
+  const showScheduleComponent = () => {
+    setHomeComponent(false);
+    setSubjectComponent(false);
+    setHomeWorkComponent(false);
+    setScheduleComponent(true);
   };
 
   return (
@@ -177,6 +197,14 @@ export default function TeacherPage() {
         homeWorkSVGComponent={homeWorkComponent && "active-cross"}
         homeWorkParagraphComponent={
           homeWorkComponent ? "_none-p active-cross" : "_none-p"
+        }
+        tableClassWorkComponent={() => showScheduleComponent()}
+        tableComponent={
+          scheduleComponent ? "_li-flex active act" : "_li-flex act"
+        }
+        tableSVGComponent={scheduleComponent && "active-cross"}
+        tableClassComponent={
+          scheduleComponent ? "_none-p active-cross" : "_none-p"
         }
       />
       {identificationDashboard()}

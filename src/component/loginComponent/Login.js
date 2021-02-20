@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import TeacherLoginComponent from "./teacherLoginComponent/teacherLoginComponent";
 import db from "../connectFirebase/firebase";
 import { useHistory } from "react-router-dom";
@@ -19,6 +19,10 @@ export default function Login() {
   const renderTeacherContext = () => {
     setShowTeacherContext(!showTeacherContext);
   };
+
+  useEffect(() => {
+    document.title = "ელექტრონული ჟურნალი - მთავარი";
+  }, []);
 
   const loginAuthentication = async () => {
     if (!personalNumber) {
